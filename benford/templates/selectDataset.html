@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Successfully uploaded {{uploadedFile}}. Now please select numerical column to analyse</h1>
+
+  <form action = "{{ url_for('home_bp.selectDataset')}}" method = "POST"  enctype = "multipart/form-data">
+      <select name="selected_column" >
+        {% for col in columns %}
+          {% if col == "7_2009" %}
+           <option value="{{col}}" selected="selected">{{col}}</option>
+          {% else %}
+            <option value="{{col}}">{{col}}</option>
+          {% endif %}
+        {% endfor %}
+        </select>
+      <input id="submit" type="submit" />
+  </form>
+
+{% endblock %}

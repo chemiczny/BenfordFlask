@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %} Upload a file for analyse{% endblock %}</h1>
+
+  <form action = "{{ url_for('home_bp.home')}}" method = "POST"  enctype = "multipart/form-data">
+      <input type = "file" onchange="this.form.submit()" name = "file"  id = "file" />
+  </form>
+
+{% endblock %}

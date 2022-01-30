@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+<script>
+ //Bar chart
+      new Chart(document.getElementById("myChart"), {
+          type: 'bar',
+          data: {
+            labels: {{labels}},
+            datasets: [
+              {
+                label: "Distribution from file",
+                backgroundColor: new Array(10).fill("#c45850") ,
+                data: {{observedDistribution }}
+              }, 
+              {
+                label: "Expected Benfords distribution",
+                backgroundColor: new Array(10).fill("#3e95cd"),
+                data : {{expectedDistribution }}
+              }
+            ]
+          },
+          options: {
+            legend: { display: true },
+            title: {
+              display: true,
+              text: 'Leading digits distribution'
+            }
+          }
+      });
+</script>
+  <div class="container">
+  <table id="data" class="table table-striped">
+    <tbody>
+        <tr>
+          <td>Chi square statistic</td>
+          <td>{{"%.4f"|format(chi_square)}}</td>
+        </tr>
+        <tr>
+          <td>p</td>
+          <td>{{"%.4f"|format(p_value)}}</td>
+        </tr>
+        <tr>
+          <td>Benford distribution confirmed</td>
+          <td>{{benford_confirmed}}</td>
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}
